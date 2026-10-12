@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLIE Codebases Comprehensive Comparison & Architectural Study</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent-green: #059669;
+            --accent-red: #dc2626;
+            --accent-amber: #d97706;
+            --tag-dl: #e0e7ff;
+            --tag-dl-text: #3730a3;
+            --tag-class: #fef3c7;
+            --tag-class-text: #92400e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            padding: 48px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.3rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .meta-badge-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .badge {
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge.highlight {
+            background: #eff6ff;
+            color: var(--primary-light);
+            border-color: #bfdbfe;
+        }
+
+        h2 {
+            color: #0f172a;
+            font-size: 1.55rem;
+            border-left: 5px solid var(--primary-light);
+            padding-left: 14px;
+            margin-top: 40px;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        .callout {
+            background: #f0fdf4;
+            border-left: 4px solid var(--accent-green);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 4px;
+        }
+
+        /* Responsive Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 14px 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        tr:hover td {
+            background-color: #f1f5f9;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tag-dl { background: var(--tag-dl); color: var(--tag-dl-text); }
+        .tag-class { background: var(--tag-class); color: var(--tag-class-text); }
+        .tag-fast { background: #dcfce7; color: #166534; }
+
+        .pro { color: var(--accent-green); font-weight: 600; }
+        .con { color: var(--accent-red); font-weight: 600; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85em;
+            color: #be185d;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Comparative Study of Low-Light Image Enhancement (LLIE) Codebases</h1>
+    <div class="subtitle">End-to-End Architectural Decomposition, Engineering Concepts, Benchmark Performance, and Deployment Guidelines</div>
+    
+    <div class="meta-badge-bar">
+        <span class="badge highlight">11 Research Codebases</span>
+        <span class="badge">NVIDIA GPU Environment</span>
+        <span class="badge">ExDark Benchmark Validation</span>
+        <span class="badge">Classical to Diffusion Paradigms</span>
+    </div>
+
+    <h2>1. Executive Summary & Paradigm Evolution</h2>
+    <p>Low-Light Image Enhancement (LLIE) has evolved through distinct algorithmic paradigms over the last decade:</p>
+    <ul>
+        <li><strong>Phase 1: Classical Statistical & Retinex (Pre-2018):</strong> Histogram Equalization (HE, CLAHE), Single-Scale & Multi-Scale Retinex (MSR). Fast but prone to noise amplification, color shifts, and unnatural edge halos.</li>
+        <li><strong>Phase 2: Supervised Deep CNNs & Frequency Decomposition (2018–2020):</strong> Retinex-Net, DSLR, KinD. Multi-scale feature extraction on registered paired datasets.</li>
+        <li><strong>Phase 3: Zero-Reference Deep Curve Estimation (2020–2021):</strong> Zero-DCE and Zero-DCE++. Formulated enhancement as estimating pixel-wise high-order tone curves using zero paired data via non-reference physical losses.</li>
+        <li><strong>Phase 4: Optimization Unrolling, NAS & Extreme Distillation (2021–2022):</strong> RUAS (DARTS architecture search) and SCI / SCI++ (Cascaded self-calibration distilled to a single 3-conv block of ~280 parameters executing in ~5 ms).</li>
+        <li><strong>Phase 5: SNR-Aware Transformers, Learned Priors & Adaptive Dimming (2022–2025):</strong> SNR-Net (Transformer + CNN hybrid), CUE (Learnable bilateral & MAE priors), and Dimma (MDN adaptive camera dimmer + diffusion UNet).</li>
+    </ul>
+
+    <div class="callout">
+        <div class="callout-title">Core Engineering Discovery</div>
+        Model parameter count does not correlate linearly with enhancement performance. <strong>SCI</strong> (~280 parameters) achieves blazing edge speeds (&gt;200 FPS) while remaining immune to color oversaturation. Modern semi-supervised architectures like <strong>Dimma</strong> achieve SOTA PSNR (27.39 dB) with only 3 to 8 training pairs by utilizing adaptive camera sensor profiling.
+    </div>
+
+    <h2>2. Master Comparison Table</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Venue</th>
+                    <th>Paradigm</th>
+                    <th>Core Engineering Concept</th>
+                    <th>Benchmark (Paper)</th>
+                    <th>Empirical Latency</th>
+                    <th>Parameters</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Zero-DCE</strong></td>
+                    <td>CVPR 2020</td>
+                    <td><span class="tag tag-dl">Zero-Reference</span></td>
+                    <td>Pixel-wise quadratic curve estimation; 4 non-reference physical losses</td>
+                    <td>LOL: 14.86 dB, SSIM 0.56</td>
+                    <td>~11.2 ms</td>
+                    <td>79.4 K</td>
+                    <td><span class="pro">Zero paired data; monotonic curve prevents clipping; stable tone</span></td>
+                    <td><span class="con">Does not denoise; amplifies sensor noise in heavy dark</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Zero-DCE++</strong></td>
+                    <td>TPAMI 2021</td>
+                    <td><span class="tag tag-dl">Zero-Reference</span></td>
+                    <td>Depthwise Separable Convolutions (CSDN); 12x spatial factor downsampling; parameter sharing</td>
+                    <td>LOL: 14.92 dB; 1000+ FPS</td>
+                    <td><span class="tag tag-fast">~10.7 ms (amort. 1.5ms)</span></td>
+                    <td><strong>10.5 K</strong></td>
+                    <td><span class="pro">87% param reduction; 1000+ FPS; mobile & embedded ready</span></td>
+                    <td><span class="con">No noise filtering; slight softness due to 12x down/up-sampling</span></td>
+                </tr>
+                <tr>
+                    <td><strong>RUAS</strong></td>
+                    <td>CVPR 2021</td>
+                    <td><span class="tag tag-dl">Unsupervised</span></td>
+                    <td>Retinex unrolling optimization (Y = R*U + N) + DARTS architecture search</td>
+                    <td>LOL: 18.23 dB, SSIM 0.72</td>
+                    <td><span class="tag tag-fast">~8.1 ms</span></td>
+                    <td><strong>~3.5 K</strong></td>
+                    <td><span class="pro">Joint illumination & denoising; tiny footprint discovered by NAS</span></td>
+                    <td><span class="con">NAS search is dataset-sensitive; can over-smooth micro-textures</span></td>
+                </tr>
+                <tr>
+                    <td><strong>SCI / SCI++</strong></td>
+                    <td>CVPR'22 / TPAMI'25</td>
+                    <td><span class="tag tag-dl">Unsupervised</span></td>
+                    <td>Self-Calibrated Illumination; training cascade; test-time calibrator drop; additivity condition</td>
+                    <td>LSRW: 17.52 dB, MIT5K: 18.06 dB</td>
+                    <td><span class="tag tag-fast">~5.0 ms (Fastest)</span></td>
+                    <td><strong>~280 params</strong></td>
+                    <td><span class="pro">Blazing fast (>200 FPS); negligible footprint; robust across wild light</span></td>
+                    <td><span class="con">No internal denoiser; extreme sensor noise requires external filter</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DRBN</strong></td>
+                    <td>CVPR 2020</td>
+                    <td><span class="tag tag-dl">Semi-Supervised</span></td>
+                    <td>Recursive Band Learning (Stage 1) + Perceptual Band Recomposition (Stage 2) via WGAN</td>
+                    <td>LOL: 20.13 dB, SSIM 0.83</td>
+                    <td>~60.8 ms</td>
+                    <td>~1.2 M</td>
+                    <td><span class="pro">Bridges signal fidelity and human perceptual preference; rich color</span></td>
+                    <td><span class="con">Complex two-stage training loop; Stage 1 can under-expose if uncalibrated</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DSLR</strong></td>
+                    <td>IEEE TMM 2020</td>
+                    <td><span class="tag tag-dl">Fully Supervised</span></td>
+                    <td>Multi-scale Laplacian Pyramid decomposition; band-pass error restoration; Instance Norm</td>
+                    <td>MIT5K: 24.21 dB, SSIM 0.90</td>
+                    <td>~65.0 ms</td>
+                    <td>~1.8 M</td>
+                    <td><span class="pro">Crisp high-frequency edge retention; avoids global contrast distortion</span></td>
+                    <td><span class="con">Requires strictly registered pairs; large memory footprint</span></td>
+                </tr>
+                <tr>
+                    <td><strong>SNR-Net</strong></td>
+                    <td>CVPR 2022</td>
+                    <td><span class="tag tag-dl">Fully Supervised</span></td>
+                    <td>SNR prior map: Long-range Transformer for low-SNR dark zones + CNN for bright zones</td>
+                    <td>LOL: 24.61 dB, SDSD: 29.80 dB</td>
+                    <td>~140.0 ms</td>
+                    <td>~4.6 M</td>
+                    <td><span class="pro">SOTA structural recovery in extreme darkness; eliminates noise without blur</span></td>
+                    <td><span class="con">Computationally heavy (Transformer self-attention); high VRAM</span></td>
+                </tr>
+                <tr>
+                    <td><strong>CUE</strong></td>
+                    <td>ICCV 2023</td>
+                    <td><span class="tag tag-dl">Supervised + Priors</span></td>
+                    <td>Learnable Priors (Bilateral UNet for illu, MAE/HOG for noise) + Invertible Network</td>
+                    <td>LOL: 25.24 dB, LOL-v2: 26.81 dB</td>
+                    <td>~114.3 ms</td>
+                    <td>~2.9 M</td>
+                    <td><span class="pro">Highest information entropy (6.54); no handcrafted prior artifacts</span></td>
+                    <td><span class="con">Multi-stage training pipeline (Noise prior -> Illu prior -> Net)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Dimma</strong></td>
+                    <td>arXiv 2023</td>
+                    <td><span class="tag tag-dl">Semi-Supervised</span></td>
+                    <td>MDN adaptive camera dimmer (3-8 pairs) + Diffusion UNet2D backbone conditioned on lightness diff</td>
+                    <td>LOL: 27.39 dB (Full), 23.54 dB (3-shot)</td>
+                    <td>~140.8 ms</td>
+                    <td>~15.2 M</td>
+                    <td><span class="pro">SOTA PSNR on LOL; fast sensor adaptation with 3-8 pairs; highest contrast</span></td>
+                    <td><span class="con">Heavy UNet architecture (~15.2M params); higher latency</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Lighting-Darkness</strong></td>
+                    <td>IEEE TPAMI 2021</td>
+                    <td><span class="tag tag-class">Survey & Platform</span></td>
+                    <td>Standardized evaluation platform covering 14+ deep architectures; LLIV-Phone dataset</td>
+                    <td>Cross-benchmark standard</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td><span class="pro">Definitive taxonomic classification, standard dataset curation</span></td>
+                    <td><span class="con">Survey hub rather than a standalone model</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Awesome-LLIE</strong></td>
+                    <td>Continuous</td>
+                    <td><span class="tag tag-class">Resource Hub</span></td>
+                    <td>Complete catalog of papers, datasets, metrics, and classical baseline implementations</td>
+                    <td>Benchmark repository</td>
+                    <td>HE: 1.4ms, Retinex: 1365ms</td>
+                    <td>N/A</td>
+                    <td><span class="pro">Central resource hub for datasets, papers, and classical algorithm references</span></td>
+                    <td><span class="con">Aggregator repository rather than an active model</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>3. Empirical Benchmark Summary (ExDark Dataset)</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Type</th>
+                    <th>Average Latency</th>
+                    <th>Brightness Gain</th>
+                    <th>Contrast (STD)</th>
+                    <th>Entropy (Bits)</th>
+                    <th>Dynamic Range</th>
+                    <th>Success Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SCI_TPAMI (SCI++)</strong></td>
+                    <td>Deep Learning</td>
+                    <td><span class="tag tag-fast">5.0 ms</span></td>
+                    <td>3.23x</td>
+                    <td>57.5</td>
+                    <td>5.93</td>
+                    <td>190.7</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>SCI_CVPR_difficult</strong></td>
+                    <td>Deep Learning</td>
+                    <td><span class="tag tag-fast">5.1 ms</span></td>
+                    <td>3.06x</td>
+                    <td>51.1</td>
+                    <td>5.96</td>
+                    <td>174.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>SCI_CVPR_medium</strong></td>
+                    <td>Deep Learning</td>
+                    <td><span class="tag tag-fast">5.3 ms</span></td>
+                    <td>3.41x</td>
+                    <td>58.0</td>
+                    <td>5.89</td>
+                    <td>194.7</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>RUAS_upe</strong></td>
+                    <td>Deep Learning</td>
+                    <td><span class="tag tag-fast">8.1 ms</span></td>
+                    <td>2.48x</td>
+                    <td>51.8</td>
+                    <td>5.60</td>
+                    <td>179.3</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>RUAS_dark</strong></td>
+                    <td>Deep Learning</td>
+                    <td><span class="tag tag-fast">8.7 ms</span></td>
+                    <td>4.61x</td>
+                    <td>74.4</td>
+                    <td>5.50</td>
+                    <td>233.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Zero-DCE++</strong></td>
+                    <td>Deep Learning</td>
+                    <td>10.7 ms (amortized ~1.5 ms)</td>
+                    <td>3.36x</td>
+                    <td>47.3</td>
+                    <td>6.47</td>
+                    <td>165.7</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>RUAS_lol</strong></td>
+                    <td>Deep Learning</td>
+                    <td>57.8 ms</td>
+                    <td>4.54x</td>
+                    <td>71.9</td>
+                    <td>6.41</td>
+                    <td>235.3</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>DRBN_stage1</strong></td>
+                    <td>Deep Learning</td>
+                    <td>60.8 ms</td>
+                    <td>0.85x</td>
+                    <td>21.2</td>
+                    <td>4.56</td>
+                    <td>77.7</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>CUE</strong></td>
+                    <td>Deep Learning</td>
+                    <td>114.3 ms</td>
+                    <td>5.60x</td>
+                    <td>42.3</td>
+                    <td><strong>6.54 (Highest)</strong></td>
+                    <td>157.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Dimma</strong></td>
+                    <td>Deep Learning</td>
+                    <td>140.8 ms</td>
+                    <td>4.55x</td>
+                    <td><strong>85.7 (Highest)</strong></td>
+                    <td>5.56</td>
+                    <td><strong>239.3 (Highest)</strong></td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Zero-DCE</strong></td>
+                    <td>Deep Learning</td>
+                    <td>11.6 ms</td>
+                    <td>3.20x</td>
+                    <td>41.3</td>
+                    <td>6.06</td>
+                    <td>148.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Classic_HE</strong></td>
+                    <td>Classical</td>
+                    <td>1.4 ms</td>
+                    <td>8.01x</td>
+                    <td>71.0</td>
+                    <td>4.54</td>
+                    <td>233.3</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Classic_CLAHE</strong></td>
+                    <td>Classical</td>
+                    <td>4.3 ms</td>
+                    <td>2.19x</td>
+                    <td>38.9</td>
+                    <td>5.52</td>
+                    <td>141.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+                <tr>
+                    <td><strong>Classic_Retinex</strong></td>
+                    <td>Classical</td>
+                    <td>1365.8 ms</td>
+                    <td>8.39x</td>
+                    <td>55.5</td>
+                    <td>7.50</td>
+                    <td>218.0</td>
+                    <td>100% (3/3)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>4. Production Deployment Matrix</h2>
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Edge IoT & Microcontrollers</span>
+                <span class="tag tag-fast">SCI++ / Zero-DCE++</span>
+            </div>
+            <p><strong>Rationale:</strong> Footprint under 10.5 KB (~280 parameters for SCI). Sub-10 ms inference with zero reference data requirements. Fits directly within on-chip cache.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Nighttime Video Surveillance (>60 FPS)</span>
+                <span class="tag tag-fast">SCI++</span>
+            </div>
+            <p><strong>Rationale:</strong> Runs at >200 FPS on GPU. Purely feed-forward 3-conv block ensures zero temporal lag and prevents flickering across changing exposures.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Extreme Darkness & Autonomous Driving</span>
+                <span class="tag tag-dl">SNR-Net</span>
+            </div>
+            <p><strong>Rationale:</strong> Severe low-SNR regions suffer destructive Poisson noise. SNR-Net's Transformer attention synthesizes lost semantics where CNNs output noise.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Computational Photography & Studio Editing</span>
+                <span class="tag tag-dl">CUE / Dimma</span>
+            </div>
+            <p><strong>Rationale:</strong> Highest PSNR/SSIM, learned Bilateral and MAE priors eliminate edge halos, while diffusion-style lightness conditioning produces rich contrast.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

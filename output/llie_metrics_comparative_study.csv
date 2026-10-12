@@ -1,0 +1,64 @@
+Algorithm,Category,Image,PSNR_dB,SSIM,RGB_SSIM,LPIPS,DeltaE,NIQE,EME,DE,LOE
+Original (Input Baseline),Reference Ground / Input,2015_00003,inf,1.0,1.0,0.0,0.0,3.888,71.584,5.926,0.0
+Original (Input Baseline),Reference Ground / Input,2015_02446,inf,1.0,1.0,0.0,0.0,10.309,20.296,4.348,0.0
+Original (Input Baseline),Reference Ground / Input,2015_06400,inf,1.0,1.0,0.0,0.0,4.583,105.961,3.953,0.0
+CUE,Customized Learnable Prior (ICCV 2023),2015_00003,13.006,0.4111,0.4111,0.2903,17.28,3.786,39.041,7.362,389.87
+CUE,Customized Learnable Prior (ICCV 2023),2015_02446,9.64,0.2201,0.2201,0.3914,25.23,5.842,6.041,5.919,1068.11
+CUE,Customized Learnable Prior (ICCV 2023),2015_06400,10.243,0.0874,0.0874,0.651,26.46,3.973,7.381,6.346,987.83
+CUE,Customized Learnable Prior (ICCV 2023),Average (All 3 Images),10.963,0.2395,0.2395,0.4442,22.99,4.534,17.488,6.542,815.27
+Classic_CLAHE,Classical (Adaptive Histogram Equalization),2015_00003,16.049,0.5148,0.5148,0.1987,10.28,4.663,33.924,6.968,669.1
+Classic_CLAHE,Classical (Adaptive Histogram Equalization),2015_02446,23.209,0.6556,0.6556,0.1351,3.78,7.408,14.448,5.291,1979.49
+Classic_CLAHE,Classical (Adaptive Histogram Equalization),2015_06400,21.42,0.3239,0.3239,0.2425,3.59,4.152,17.279,4.289,815.31
+Classic_CLAHE,Classical (Adaptive Histogram Equalization),Average (All 3 Images),20.226,0.4981,0.4981,0.1921,5.88,5.408,21.884,5.516,1154.63
+Classic_HE,Classical (Histogram Equalization),2015_00003,6.653,0.1683,0.1683,0.4621,36.51,5.463,73.809,5.792,638.09
+Classic_HE,Classical (Histogram Equalization),2015_02446,5.553,0.1266,0.1266,0.7074,42.62,9.161,31.573,4.131,674.41
+Classic_HE,Classical (Histogram Equalization),2015_06400,6.613,0.1237,0.1237,0.7953,32.14,4.187,132.831,3.691,1033.7
+Classic_HE,Classical (Histogram Equalization),Average (All 3 Images),6.273,0.1395,0.1395,0.6549,37.09,6.27,79.404,4.538,782.07
+Classic_Retinex,Classical (Multi-Scale Retinex),2015_00003,7.022,0.1987,0.1987,0.4381,38.42,5.965,94.348,7.396,1597.83
+Classic_Retinex,Classical (Multi-Scale Retinex),2015_02446,6.863,0.1464,0.1464,0.5826,36.2,7.085,26.641,7.479,2297.73
+Classic_Retinex,Classical (Multi-Scale Retinex),2015_06400,6.007,0.0452,0.0452,0.8033,42.47,4.32,16.923,7.622,2390.79
+Classic_Retinex,Classical (Multi-Scale Retinex),Average (All 3 Images),6.631,0.1301,0.1301,0.608,39.03,5.79,45.971,7.499,2095.45
+DRBN_stage1,Semi-Supervised Deep Learning (Recursive Band Network),2015_00003,25.162,0.719,0.719,0.1829,5.51,4.642,66.531,5.392,1060.66
+DRBN_stage1,Semi-Supervised Deep Learning (Recursive Band Network),2015_02446,27.204,0.7764,0.7764,0.161,2.93,12.324,23.16,4.406,2131.08
+DRBN_stage1,Semi-Supervised Deep Learning (Recursive Band Network),2015_06400,27.212,0.8406,0.8406,0.0949,2.23,7.202,109.225,3.877,2067.49
+DRBN_stage1,Semi-Supervised Deep Learning (Recursive Band Network),Average (All 3 Images),26.526,0.7787,0.7787,0.1463,3.56,8.056,66.305,4.558,1753.08
+Dimma,Semi-Supervised Deep Learning (Adaptive Dimming),2015_00003,8.387,0.2475,0.2475,0.421,29.69,6.246,114.159,6.689,850.59
+Dimma,Semi-Supervised Deep Learning (Adaptive Dimming),2015_02446,7.927,0.3057,0.3057,0.5001,23.94,4.963,133.773,4.383,1539.32
+Dimma,Semi-Supervised Deep Learning (Adaptive Dimming),2015_06400,8.467,0.4292,0.4292,0.6825,26.03,3.381,121.037,5.599,1715.04
+Dimma,Semi-Supervised Deep Learning (Adaptive Dimming),Average (All 3 Images),8.26,0.3275,0.3275,0.5345,26.55,4.863,122.99,5.557,1368.32
+RUAS_dark,Unsupervised NAS Retinex (Dark model),2015_00003,5.789,0.1357,0.1357,0.4531,43.59,5.419,65.14,7.297,863.0
+RUAS_dark,Unsupervised NAS Retinex (Dark model),2015_02446,7.977,0.2507,0.2507,0.3943,22.69,9.05,17.193,3.874,453.69
+RUAS_dark,Unsupervised NAS Retinex (Dark model),2015_06400,14.604,0.3634,0.3634,0.4424,11.81,3.581,111.537,5.341,172.87
+RUAS_dark,Unsupervised NAS Retinex (Dark model),Average (All 3 Images),9.457,0.2499,0.2499,0.4299,26.03,6.017,64.623,5.504,496.52
+RUAS_lol,Unsupervised NAS Retinex (LOL model),2015_00003,6.301,0.1766,0.1766,0.457,41.76,3.907,34.106,7.851,847.44
+RUAS_lol,Unsupervised NAS Retinex (LOL model),2015_02446,8.181,0.2878,0.2878,0.3154,24.39,9.261,11.551,5.405,727.12
+RUAS_lol,Unsupervised NAS Retinex (LOL model),2015_06400,14.828,0.3646,0.3646,0.3992,13.07,4.462,22.016,5.968,1006.97
+RUAS_lol,Unsupervised NAS Retinex (LOL model),Average (All 3 Images),9.77,0.2763,0.2763,0.3905,26.41,5.877,22.558,6.408,860.51
+RUAS_upe,Unsupervised NAS Retinex (UPE model),2015_00003,13.332,0.4652,0.4652,0.2176,16.51,4.397,66.818,7.156,115.4
+RUAS_upe,Unsupervised NAS Retinex (UPE model),2015_02446,14.117,0.5871,0.5871,0.1673,10.18,8.473,19.092,4.769,167.61
+RUAS_upe,Unsupervised NAS Retinex (UPE model),2015_06400,18.468,0.7187,0.7187,0.2228,6.46,3.742,104.362,4.863,138.63
+RUAS_upe,Unsupervised NAS Retinex (UPE model),Average (All 3 Images),15.306,0.5903,0.5903,0.2026,11.05,5.537,63.424,5.596,140.55
+SCI_CVPR_difficult,Self-Calibrated Illumination (CVPR Difficult),2015_00003,10.904,0.2887,0.2887,0.3127,22.7,4.61,66.834,7.441,482.9
+SCI_CVPR_difficult,Self-Calibrated Illumination (CVPR Difficult),2015_02446,13.43,0.3907,0.3907,0.2547,12.8,7.736,18.806,5.241,276.85
+SCI_CVPR_difficult,Self-Calibrated Illumination (CVPR Difficult),2015_06400,19.044,0.489,0.489,0.3379,7.64,3.306,109.712,5.212,126.09
+SCI_CVPR_difficult,Self-Calibrated Illumination (CVPR Difficult),Average (All 3 Images),14.459,0.3895,0.3895,0.3018,14.38,5.217,65.117,5.965,295.28
+SCI_CVPR_easy,Self-Calibrated Illumination (CVPR Easy),2015_00003,18.662,0.6824,0.6824,0.1302,8.79,3.855,71.315,6.841,124.41
+SCI_CVPR_easy,Self-Calibrated Illumination (CVPR Easy),2015_02446,19.212,0.7716,0.7716,0.0913,5.57,8.685,20.063,4.726,137.6
+SCI_CVPR_easy,Self-Calibrated Illumination (CVPR Easy),2015_06400,26.096,0.8487,0.8487,0.1294,2.97,3.921,107.757,4.494,62.08
+SCI_CVPR_easy,Self-Calibrated Illumination (CVPR Easy),Average (All 3 Images),21.323,0.7676,0.7676,0.117,5.78,5.487,66.378,5.354,108.03
+SCI_CVPR_medium,Self-Calibrated Illumination (CVPR Medium),2015_00003,9.584,0.2568,0.2568,0.3312,26.95,4.703,65.405,7.555,328.23
+SCI_CVPR_medium,Self-Calibrated Illumination (CVPR Medium),2015_02446,11.281,0.3617,0.3617,0.2769,16.22,8.388,17.768,4.95,239.76
+SCI_CVPR_medium,Self-Calibrated Illumination (CVPR Medium),2015_06400,17.377,0.4713,0.4713,0.3552,8.61,3.612,109.353,5.179,148.18
+SCI_CVPR_medium,Self-Calibrated Illumination (CVPR Medium),Average (All 3 Images),12.747,0.3633,0.3633,0.3211,17.26,5.568,64.175,5.895,238.72
+SCI_TPAMI,Self-Calibrated Illumination (TPAMI 2025),2015_00003,10.369,0.2903,0.2903,0.3296,24.47,4.162,65.783,7.568,386.29
+SCI_TPAMI,Self-Calibrated Illumination (TPAMI 2025),2015_02446,11.9,0.4,0.4,0.255,14.85,7.542,17.887,5.038,245.43
+SCI_TPAMI,Self-Calibrated Illumination (TPAMI 2025),2015_06400,18.555,0.517,0.517,0.3308,7.32,3.419,109.246,5.18,101.02
+SCI_TPAMI,Self-Calibrated Illumination (TPAMI 2025),Average (All 3 Images),13.608,0.4024,0.4024,0.3051,15.55,5.041,64.305,5.929,244.25
+Zero-DCE,Zero-Reference Deep Learning (Curve Estimation),2015_00003,11.981,0.3392,0.3392,0.2861,21.2,4.916,63.293,7.153,1229.05
+Zero-DCE,Zero-Reference Deep Learning (Curve Estimation),2015_02446,14.122,0.3189,0.3189,0.3238,14.21,7.337,16.838,5.627,799.3
+Zero-DCE,Zero-Reference Deep Learning (Curve Estimation),2015_06400,18.703,0.3609,0.3609,0.4123,8.84,3.25,112.461,5.396,180.49
+Zero-DCE,Zero-Reference Deep Learning (Curve Estimation),Average (All 3 Images),14.935,0.3397,0.3397,0.3407,14.75,5.168,64.197,6.059,736.28
+Zero-DCE++,Zero-Reference Deep Learning (Depthwise Separable),2015_00003,10.853,0.3038,0.3038,0.305,22.97,4.859,63.178,7.359,707.44
+Zero-DCE++,Zero-Reference Deep Learning (Depthwise Separable),2015_02446,13.043,0.3265,0.3265,0.3112,15.17,7.447,17.039,6.437,1002.9
+Zero-DCE++,Zero-Reference Deep Learning (Depthwise Separable),2015_06400,17.472,0.3418,0.3418,0.4118,9.95,3.308,112.329,5.615,477.18
+Zero-DCE++,Zero-Reference Deep Learning (Depthwise Separable),Average (All 3 Images),13.789,0.324,0.324,0.3427,16.03,5.205,64.182,6.47,729.17

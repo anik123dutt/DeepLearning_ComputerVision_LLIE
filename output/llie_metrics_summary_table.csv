@@ -1,0 +1,16 @@
+Algorithm,Category,Image,PSNR_dB,SSIM,RGB_SSIM,LPIPS,DeltaE,NIQE,EME,DE,LOE
+CUE,Customized Learnable Prior (ICCV 2023),Average (All 3 Images),10.963,0.2395,0.2395,0.4442,22.99,4.534,17.488,6.542,815.27
+Dimma,Semi-Supervised Deep Learning (Adaptive Dimming),Average (All 3 Images),8.26,0.3275,0.3275,0.5345,26.55,4.863,122.99,5.557,1368.32
+SCI_TPAMI,Self-Calibrated Illumination (TPAMI 2025),Average (All 3 Images),13.608,0.4024,0.4024,0.3051,15.55,5.041,64.305,5.929,244.25
+Zero-DCE,Zero-Reference Deep Learning (Curve Estimation),Average (All 3 Images),14.935,0.3397,0.3397,0.3407,14.75,5.168,64.197,6.059,736.28
+Zero-DCE++,Zero-Reference Deep Learning (Depthwise Separable),Average (All 3 Images),13.789,0.324,0.324,0.3427,16.03,5.205,64.182,6.47,729.17
+SCI_CVPR_difficult,Self-Calibrated Illumination (CVPR Difficult),Average (All 3 Images),14.459,0.3895,0.3895,0.3018,14.38,5.217,65.117,5.965,295.28
+Classic_CLAHE,Classical (Adaptive Histogram Equalization),Average (All 3 Images),20.226,0.4981,0.4981,0.1921,5.88,5.408,21.884,5.516,1154.63
+SCI_CVPR_easy,Self-Calibrated Illumination (CVPR Easy),Average (All 3 Images),21.323,0.7676,0.7676,0.117,5.78,5.487,66.378,5.354,108.03
+RUAS_upe,Unsupervised NAS Retinex (UPE model),Average (All 3 Images),15.306,0.5903,0.5903,0.2026,11.05,5.537,63.424,5.596,140.55
+SCI_CVPR_medium,Self-Calibrated Illumination (CVPR Medium),Average (All 3 Images),12.747,0.3633,0.3633,0.3211,17.26,5.568,64.175,5.895,238.72
+Classic_Retinex,Classical (Multi-Scale Retinex),Average (All 3 Images),6.631,0.1301,0.1301,0.608,39.03,5.79,45.971,7.499,2095.45
+RUAS_lol,Unsupervised NAS Retinex (LOL model),Average (All 3 Images),9.77,0.2763,0.2763,0.3905,26.41,5.877,22.558,6.408,860.51
+RUAS_dark,Unsupervised NAS Retinex (Dark model),Average (All 3 Images),9.457,0.2499,0.2499,0.4299,26.03,6.017,64.623,5.504,496.52
+Classic_HE,Classical (Histogram Equalization),Average (All 3 Images),6.273,0.1395,0.1395,0.6549,37.09,6.27,79.404,4.538,782.07
+DRBN_stage1,Semi-Supervised Deep Learning (Recursive Band Network),Average (All 3 Images),26.526,0.7787,0.7787,0.1463,3.56,8.056,66.305,4.558,1753.08
